@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  app:
+    container_name: hackatex-node
+    image: node:latest
+    restart: always
+    working_dir: /app
+    command: tail -f /dev/null 
+    volumes: 
+      - .:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mysql
+    depends_on: 
+      - mysql
+  mysql:
+    container_name: hackatex-mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: 'mysql'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'secretPassword'
+      MYSQL_ROOT_PASSWORD: 'toor'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - node-database:/var/lib/mysql
+    restart: always
+volumes:
+  node-database:
