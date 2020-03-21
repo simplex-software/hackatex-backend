@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  CategoryRouter: require('./category')
+  CategoryRouter: require('./category'),
 };

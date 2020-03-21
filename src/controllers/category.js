@@ -1,15 +1,24 @@
-const { Category } = require('../models');
+const { CategoryService } = require('../services');
 
 module.exports = {
-  getCategories: async function(req, res, next) {
-    const categories = await Category.findAll();
-    const data = categories.map(category => {
-      return {
-        id: category.id,
-        name: category.name
-      }
-    });
+  async getCategories(req, res, next) {
+    const categoryService = new CategoryService();
+    const data = await categoryService.getCategories();
 
-    return res.json({ success: true, categories: data});
+    return res.json({ success: true, categories: data });
+  },
+
+  async getEventsByCategory(req, res, next) {
+    const categoryId = req.params.categoryId;
+    const page = req.query.page || 1;
+
+    try {
+      const eventService = new CategoryService();
+      const data = await eventService.getAllByCategoryId(categoryId, page);
+
+      return res.json({ success: true, events: data });
+    } catch (err) {
+      next(err);
+    }
   }
-};
+}

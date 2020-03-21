@@ -3,9 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 
 const { CategoryRouter } = require('./src/routes');
-const { auth } = require('./src/middleware');
 
-const { Category } = require('./src/models');
+const { Category, Event } = require('./src/models');
+
+Event.belongsTo(Category, { foreignKey: 'category_id' });
+Category.hasMany(Event);
 
 /**
  * Use bodyParser to process requests
@@ -22,6 +24,7 @@ app.use((err, req, res, next) => {
   }
 
   res.status(statusCode).json({
+    status: false,
     error: err.message
   });
 });
