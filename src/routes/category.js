@@ -33,4 +33,6 @@ const { CategoryController } = require('../controllers');
  */
 router.get('/', CategoryController.getCategories);
 
+router.get('/:categoryId/events', CategoryController.getEventsByCategory);
+
 module.exports = router;
