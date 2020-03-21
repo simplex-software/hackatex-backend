@@ -16,11 +16,7 @@ let options = {
     schemes: ['http'],
     tags: [
       {
-        name: "Auth",
-        description: "Authorization"
-      },
-      {
-        name: "Example",
+        name: "Category",
         description: ""
       }
     ],

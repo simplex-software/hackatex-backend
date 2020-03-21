@@ -9,7 +9,11 @@
     "start": "node server.js",
     "fixtures": "node bin/fixtures.js",
     "test": "./node_modules/.bin/jest --no-cache",
-    "test:coverage": "./node_modules/.bin/jest --no-cache --coverage"
+    "test:coverage": "./node_modules/.bin/jest --no-cache --coverage",
+    "migrations:create": "./node_modules/.bin/sequelize-cli migration:create --config config/config.json --name",
+    "migrations:migrate": "./node_modules/.bin/sequelize-cli db:migrate --config config/config.json",
+    "seed:generate": "./node_modules/.bin/sequelize-cli seed:generate --config config/config.json --name",
+    "db:seed": "./node_modules/.bin/sequelize-cli db:seed:all --config config/config.json"
   },
   "repository": {
     "type": "git",
@@ -25,7 +29,8 @@
     "jsonwebtoken": "^8.4.0",
     "mysql2": "^2.1.0",
     "nodemon": "^1.19.4",
-    "sequelize": "^5.21.5"
+    "sequelize": "^5.21.5",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "express-swagger-generator": "^1.1.15",
