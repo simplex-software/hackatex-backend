@@ -9,7 +9,7 @@ services:
     volumes: 
       - .:/app
     ports:
-      - "3000:3000"
+      - "3012:3000"
     links:
       - mysql
     depends_on: 
@@ -23,7 +23,7 @@ services:
       MYSQL_PASSWORD: secretPassword
       MYSQL_ROOT_PASSWORD: toor
     ports:
-      - '3306:3306'
+      - '3312:3306'
     expose:
       - '3306'
     volumes:
