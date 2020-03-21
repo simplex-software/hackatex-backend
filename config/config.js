@@ -14,8 +14,10 @@ const config = {
   },
   database: {
     host: process.env.DB_HOST || 'localhost',
-    name: process.env.DB_NAME || 'demo',
-    port: process.env.DB_PORT || 27017
+    name: process.env.DB_NAME || 'hackatex',
+    port: process.env.DB_PORT || 3306,
+    username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || 'toor'
   },
   jwt: {
     secret: process.env.JWT_SECRET || 'jwtSecret'
@@ -26,13 +28,5 @@ const config = {
     }
   }
 };
-
-const database = config.database;
-
-// Set connection url to use in different places
-config.database.uri = `mongodb://${database.host}:${database.port}/${database.name}`
-
-// Test database
-config.test.database.uri = `mongodb://${database.host}:${database.port}/${config.test.database.name}`
 
 module.exports = config;

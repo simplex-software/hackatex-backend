@@ -1,12 +1,10 @@
 const app = require('./app');
+const sequelize = require('./src/utils/database');
 const expressSwagger = require('express-swagger-generator')(app);
-const mongoose = require('mongoose');
 const { config, swagger } = require('./config');
 
-mongoose.connect(config.database.uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+sequelize
+  .sync()
   .then(() => {
     console.log('Connected to database.');
 

@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const request = require('supertest');
 
 const app = require('../../app');
@@ -8,19 +7,7 @@ const createPasswordHelper = require('../../src/helpers/create-password');
 
 describe('Testing Login', () => {
   beforeAll(async () => {
-    await mongoose.connect(config.test.database.uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-
-    const password = createPasswordHelper('testing');
-
-    await User.create({
-      name: 'testing name',
-      email: 'test@mail.com',
-      username: 'test',
-      password: password
-    });
+    // Reimplement using Sequelize
   });
 
   it('Successful login', async (done) => {
@@ -73,7 +60,5 @@ describe('Testing Login', () => {
   }, 10000);
 
   afterAll(async () => {
-    await mongoose.connection.db.dropCollection('users');
-    await mongoose.disconnect();
   });
 });
