@@ -57,6 +57,7 @@ router.get('/', CategoryController.getCategories);
  * @route GET /api/v1/categories/{id}/events
  * @group Category
  * @param { integer } id.path.required - Category ID
+ * @param { integer } page.query - Page number
  * @returns { GetEventsByCategoryResponse } 200 - OK
  * @returns { Error.model }  500 - Unexpected error
  */
