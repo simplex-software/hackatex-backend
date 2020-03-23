@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const { CategoryRouter } = require('./src/routes');
+const { CategoryRouter, EventRouter } = require('./src/routes');
 
 /**
  * Use bodyParser to process requests
@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/v1/categories', CategoryRouter);
+app.use('/api/v1/events', EventRouter);
 
 app.use((err, req, res, next) => {
   let statusCode = 500;
