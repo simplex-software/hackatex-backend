@@ -1,4 +1,4 @@
-const { CategoryService } = require('../services');
+const { CategoryService, EventService } = require('../services');
 
 module.exports = {
   async getCategories(req, res, next) {
@@ -13,7 +13,7 @@ module.exports = {
     const page = req.query.page || 1;
 
     try {
-      const eventService = new CategoryService();
+      const eventService = new EventService();
       const data = await eventService.getAllByCategoryId(categoryId, page);
 
       return res.json({ success: true, events: data });
