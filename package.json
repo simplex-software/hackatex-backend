@@ -9,7 +9,7 @@
     "start": "node server.js",
     "fixtures": "node bin/fixtures.js",
     "test": "./node_modules/.bin/jest --no-cache --detectOpenHandles",
-    "test:coverage": "./node_modules/.bin/jest --no-cache --coverage",
+    "test:coverage": "./node_modules/.bin/jest --no-cache --coverage --detectOpenHandles",
     "migrations:create": "./node_modules/.bin/sequelize-cli migration:create --config config/config.json --name",
     "migrations:migrate": "./node_modules/.bin/sequelize-cli db:migrate --config config/config.json",
     "seed:generate": "./node_modules/.bin/sequelize-cli seed:generate --config config/config.json --name",
