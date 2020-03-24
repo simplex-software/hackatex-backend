@@ -50,6 +50,18 @@ class EventService {
     });
   }
 
+  async getEventDetails(eventId) {
+    const event = await Event.findByPk(eventId);
+
+    if (!event) {
+      const err = new Error('Invalid event ID.');
+      err.statusCode = 404;
+      throw err;
+    }
+
+    return this.formatEventResponse(event.get({ raw: true }));
+  }
+
   formatEventResponse(event) {
     const date = event.start_date;
     const created = event.createdAt;

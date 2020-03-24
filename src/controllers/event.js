@@ -16,6 +16,15 @@ module.exports = {
   },
 
   async getEventDetails(req, res, next) {
-    
+    const eventId = req.params.id;
+
+    try {
+      const eventService = new EventService();
+      const data = await eventService.getEventDetails(eventId);
+
+      res.json({ success: true, event: data });
+    } catch(err) {
+      next(err);
+    }
   }
 };

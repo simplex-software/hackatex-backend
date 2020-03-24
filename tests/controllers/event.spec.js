@@ -82,5 +82,33 @@ describe('Event Endpoints', () => {
 
       assert.deepStrictEqual(response.body.events, []);
     });
+
+    it('should return a 404 if event id does not exist', async () => {
+      let c1 = await Category.create({ name: 'category1', description: 'description1' });
+      await Event.create({ name: 'first', start_date: new Date(), category_id: c1.id });
+      const lastId = await Event.max('id'); 
+
+      let response = await request(app)
+        .get(`/api/v1/events/${lastId + 1000}`)
+        .expect(404);
+
+      assert.equal(response.body.success, false);
+      assert.equal(response.body.error, 'Invalid event ID.');
+    });
+
+    it('should return an event', async () => {
+      const eventService = new EventService();
+      let c1 = await Category.create({ name: 'category1', description: 'description1' });
+      const e1 = await Event.create({ name: 'first', start_date: new Date(), category_id: c1.id });
+
+      const rawEvent = await Event.findByPk(e1.id, { raw: true });
+
+      let response = await request(app)
+        .get(`/api/v1/events/${e1.id}`)
+        .expect(200);
+
+      assert.equal(response.body.success, true);
+      assert.deepStrictEqual(response.body.event, eventService.formatEventResponse(rawEvent));
+    });
   });
 });

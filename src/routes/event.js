@@ -11,6 +11,12 @@ const { EventController } = require('../controllers');
  * @property { Array.<Event> } events - Events list
  */
 
+  /**
+ * @typedef GetEventDetailsResponse
+ * @property { boolean } success - true
+ * @property { Event } event - Event data
+ */
+
 /**
 * @typedef Event
 * @property { int } id - Event ID
@@ -28,12 +34,23 @@ const { EventController } = require('../controllers');
 /**
  * Get events endpoint
  * @route GET /api/v1/events
- * @group Category
+ * @group Event
  * @param { integer } page.query - Page number
  * @param { string }  search.query - Search keyword
  * @returns { GetEventsResponse } 200 - OK
  * @returns { Error.model }  500 - Unexpected error
  */
 router.get('/', EventController.getEvents);
+
+/**
+ * Get event details endpoint
+ * @route GET /api/v1/events/{id}
+ * @group Event
+ * @param { integer } id.path.required - Event ID
+ * @returns { GetEventsByCategoryResponse } 200 - OK
+ * @returns { Error.model } 404 - Not found
+ * @returns { Error.model }  500 - Unexpected error
+ */
+router.get('/:id', EventController.getEventDetails);
 
 module.exports = router;

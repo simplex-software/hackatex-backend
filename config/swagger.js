@@ -18,6 +18,10 @@ let options = {
       {
         name: "Category",
         description: ""
+      },
+      {
+        name: "Event",
+        description: ""
       }
     ],
     securityDefinitions: {
